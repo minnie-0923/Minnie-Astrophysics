@@ -49,14 +49,14 @@ learn something about astrophysics!
 1. **克隆仓库**
 
    ```bash
-   git clone https://github.com/yourusername/gravitational-wave-analysis.git
-   cd gravitational-wave-analysis
+   git clone https://github.com/minnie-0923/Minnie-Astrophysics.git
+   cd Minnie-Astrophysics
    ```
 
 2. **安装依赖**
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirement.txt
    ```
 
 ### 基本使用
