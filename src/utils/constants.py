@@ -29,4 +29,5 @@ BANDPASS_RANGE = (50, 250)  # Hz
 NOTCH_FREQUENCIES = [60, 120, 180]  # Hz
 
 # 音频参数
+
 AUDIO_TIME_WINDOW = 1.5  # 秒
