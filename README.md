@@ -155,3 +155,4 @@ notches = [filter_design.notch(line, hdata.sample_rate) for line in (60, 120, 18
 - LIGO科学合作组织提供开放数据
 - GWPy开发团队提供专业分析工具
 - 所有为引力波探测做出贡献的科学家
+- github.com/wj198414/ASTRON1221的项目启发
