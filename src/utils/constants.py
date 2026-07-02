@@ -1,33 +1,33 @@
 """
-常量定义
+Shared constants.
 """
 
-# 引力波事件参数
+# Gravitational-wave event parameters.
 EVENT_PARAMS = {
     'GW150914': {
         'event_time': 1126259462.4,
         'start_time': 1126259446,
         'end_time': 1126259478,
-        'description': '首个黑洞合并事件'
+        'description': 'First detected binary black-hole merger'
     },
     'GW170817': {
         'event_time': 1187008882.4,
         'start_time': 1187008842,
         'end_time': 1187008922,
-        'description': '中子星合并事件'
+        'description': 'Binary neutron-star merger'
     }
 }
 
-# 探测器颜色
+# Detector colors.
 DETECTOR_COLORS = {
     'H1': 'black',      # Hanford
     'L1': 'gray'        # Livingston
 }
 
-# 滤波器参数
+# Filter parameters.
 BANDPASS_RANGE = (50, 250)  # Hz
 NOTCH_FREQUENCIES = [60, 120, 180]  # Hz
 
-# 音频参数
+# Audio parameters.
 
-AUDIO_TIME_WINDOW = 1.5  # 秒
+AUDIO_TIME_WINDOW = 1.5  # seconds

@@ -1,5 +1,5 @@
 """
-工具函数模块
+Utility module.
 """
 
 from .constants import EVENT_PARAMS, DETECTOR_COLORS
