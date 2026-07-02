@@ -1,5 +1,5 @@
 """
-数据处理模块
+Data processing module.
 """
 
 from .fetch_data import fetch_ligo_data

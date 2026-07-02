@@ -1,46 +1,46 @@
 """
-信号滤波模块
+Signal filtering utilities.
 """
 
 from gwpy.signal import filter_design
 
 def design_filters(sample_rate):
     """
-    设计滤波器组
+    Design the filter set.
     
-    参数:
-        sample_rate: 采样率
+    Args:
+        sample_rate: Sampling rate.
     
-    返回:
-        tuple: (带通滤波器, 陷波滤波器列表, 合并滤波器)
+    Returns:
+        tuple: (bandpass filter, list of notch filters, combined filter)
     """
-    # 设计带通滤波器 (50-250Hz)
+    # Design the bandpass filter (50-250 Hz).
     bp = filter_design.bandpass(50, 250, sample_rate)
     
-    # 设计陷波滤波器消除电源线干扰
+    # Design notch filters to remove power-line interference.
     notches = [filter_design.notch(line, sample_rate) for line in (60, 120, 180)]
     
-    # 合并滤波器
+    # Combine all filters.
     zpk = filter_design.concatenate_zpks(bp, *notches)
     
     return bp, notches, zpk
 
 def apply_filters(data, zpk, crop_edges=True):
     """
-    应用滤波器到数据
+    Apply filters to the data.
     
-    参数:
-        data: 输入数据
-        zpk: 滤波器
-        crop_edges: 是否裁剪边界
+    Args:
+        data: Input data.
+        zpk: Filter in zero-pole-gain format.
+        crop_edges: Whether to crop edges after filtering.
     
-    返回:
-        TimeSeries: 滤波后数据
+    Returns:
+        TimeSeries: Filtered data.
     """
-    # 应用滤波器
+    # Apply the filter.
     filtered_data = data.filter(zpk, filtfilt=True)
     
-    # 裁剪数据边界以避免边缘效应
+    # Crop data edges to reduce edge effects.
     if crop_edges:
         data = data.crop(*data.span.contract(1))
         filtered_data = filtered_data.crop(*filtered_data.span.contract(1))
@@ -49,18 +49,18 @@ def apply_filters(data, zpk, crop_edges=True):
 
 def process_signal(data):
     """
-    完整的信号处理流程
+    Run the complete signal-processing workflow.
     
-    参数:
-        data: 原始数据
+    Args:
+        data: Raw data.
     
-    返回:
-        tuple: (滤波后数据, 滤波器)
+    Returns:
+        tuple: (filtered data, filter)
     """
-    # 设计滤波器
+    # Design filters.
     bp, notches, zpk = design_filters(data.sample_rate)
     
-    # 应用滤波器
+    # Apply filters.
     filtered_data = apply_filters(data, zpk)
     
     return filtered_data, zpk

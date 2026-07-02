@@ -1,47 +1,47 @@
 """
-数据获取模块 - 从GWOSC获取LIGO数据
+Data acquisition utilities for downloading LIGO data from GWOSC.
 """
 
 from gwpy.timeseries import TimeSeries
 
 def fetch_ligo_data(detector, start_time, end_time, cache=False):
     """
-    从GWOSC获取LIGO应变数据
+    Fetch LIGO strain data from GWOSC.
     
-    参数:
-        detector: 探测器 ('H1' 或 'L1')
-        start_time: 开始时间 (GPS时间)
-        end_time: 结束时间 (GPS时间)
-        cache: 是否缓存数据
+    Args:
+        detector: Detector name ('H1' or 'L1').
+        start_time: Start time in GPS seconds.
+        end_time: End time in GPS seconds.
+        cache: Whether to cache downloaded data.
     
-    返回:
-        TimeSeries: 应变数据
+    Returns:
+        TimeSeries: Strain data.
     """
-    print(f"从GWOSC获取 {detector} 数据: {start_time} 到 {end_time}")
+    print(f"Fetching {detector} data from GWOSC: {start_time} to {end_time}")
     
     try:
         data = TimeSeries.fetch_open_data(detector, start_time, end_time, cache=cache)
-        print(f"成功获取 {detector} 数据: {len(data)} 个数据点")
+        print(f"Fetched {detector} data successfully: {len(data)} samples")
         return data
     except Exception as e:
-        print(f"获取数据失败: {e}")
+        print(f"Data fetch failed: {e}")
         raise
 
 def fetch_event_data(event_name, detector='H1'):
     """
-    获取特定事件的数据
+    Fetch data for a specific event.
     
-    参数:
-        event_name: 事件名称 ('GW150914' 或 'GW170817')
-        detector: 探测器
+    Args:
+        event_name: Event name ('GW150914' or 'GW170817').
+        detector: Detector name.
     
-    返回:
-        tuple: (数据, 事件时间, 开始时间, 结束时间)
+    Returns:
+        tuple: (data, event time, start time, end time)
     """
     from ..utils.constants import EVENT_PARAMS
     
     if event_name not in EVENT_PARAMS:
-        raise ValueError(f"未知事件: {event_name}")
+        raise ValueError(f"Unknown event: {event_name}")
     
     params = EVENT_PARAMS[event_name]
     data = fetch_ligo_data(detector, params['start_time'], params['end_time'])
