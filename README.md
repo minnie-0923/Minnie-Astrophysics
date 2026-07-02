@@ -1,158 +1,158 @@
 # Minnie-Astrophysics
-learn something about astrophysics!
+
+An astrophysics data-analysis project that explores LIGO gravitational-wave events through signal processing, visualization, detector comparison, and audio sonification.
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![GWPy](https://img.shields.io/badge/GWPy-3.0%2B-orange)](https://gwpy.github.io/)
 
-一个用于分析LIGO引力波数据的Python项目，包含信号处理、可视化和宇宙事件的音频转换功能。
+## Project Overview
 
-## 项目概述
+This repository analyzes public LIGO data from two landmark gravitational-wave detections:
 
-本项目处理和分析来自重大宇宙事件的引力波信：
+- **GW150914**: the first direct detection of gravitational waves, produced by a binary black-hole merger.
+- **GW170817**: a historic binary neutron-star merger with electromagnetic counterparts, marking a major moment in multi-messenger astronomy.
 
-- **GW150914**: 首次直接探测到的双黑洞合并引力波事件
-- **GW170817**: 具有电磁对应体的历史性双中子星合并事件
+The project uses open data from the Gravitational Wave Open Science Center (GWOSC) to turn raw strain measurements into interpretable scientific outputs: amplitude spectral density plots, filtered strain curves, Q-transform time-frequency maps, detector comparisons, and audible WAV files.
 
-## 功能特性
+## Key Features
 
-- **数据获取**: 直接从LIGO开放科学中心(GWOSC)获取数据
-- **频谱分析**: 振幅谱密度(ASD)计算
-- **信号滤波**: 带通滤波和电源线噪声消除
-- **时频分析**: Q变换用于啁啾信号可视化
-- **多探测器对比**: 汉福德与利文斯顿数据关联分析
-- **音频转换**: 将引力波信号转换为可听WAV文件
+- **Open data access**: downloads LIGO strain data directly from GWOSC.
+- **Spectral analysis**: computes amplitude spectral density (ASD) to inspect detector noise and signal bands.
+- **Signal filtering**: applies a 50-250 Hz bandpass filter and notch filters at 60, 120, and 180 Hz.
+- **Time-frequency analysis**: uses Q-transforms to visualize gravitational-wave chirp structure.
+- **Multi-detector comparison**: compares Hanford (H1) and Livingston (L1) data after time-shift and phase adjustment.
+- **Audio sonification**: converts gravitational-wave strain data into audible WAV files.
 
-## 项目结构
+## Repository Structure
 
-```py
-引力波分析项目/
-├── src/                     # 源代码
-│   ├── data_processing/     # 数据处理模块
-│   ├── visualization/       # 绘图和图表
-│   ├── audio_generation/    # WAV文件转换
-│   └── utils/               # 工具函数
-├── notebooks/               # Jupyter笔记本
+```text
+Minnie-Astrophysics/
+├── src/                     # Source code
+│   ├── data_processing/     # Data download and filtering utilities
+│   ├── visualization/       # Plotting functions
+│   ├── audio_generation/    # WAV conversion utilities
+│   └── utils/               # Constants and shared parameters
+├── notebooks/               # Jupyter notebooks
 │   ├── GW150914_Analysis.ipynb
 │   └── GW170817_Analysis.ipynb
-├── audio/                   # 生成的音频文件
-├── results/                 # 分析结果
-│   ├── plots/               # 生成的图表
-│   └── comparisons/         # 多探测器研究
-├── requirements.txt
+├── audio/                   # Generated gravitational-wave audio files
+├── results/                 # Analysis outputs
+│   ├── plots/               # Generated plots
+│   └── comparison/          # Multi-detector comparison figures
+├── requirement.txt
 └── README.md
 ```
 
-## 快速开始
+## Quick Start
 
-### 安装步骤
+### 1. Clone the Repository
 
-1. **克隆仓库**
+```bash
+git clone https://github.com/minnie-0923/Minnie-Astrophysics.git
+cd Minnie-Astrophysics
+```
 
-   ```bash
-   git clone https://github.com/minnie-0923/Minnie-Astrophysics.git
-   cd Minnie-Astrophysics
-   ```
+### 2. Install Dependencies
 
-2. **安装依赖**
+```bash
+pip install -r requirement.txt
+```
 
-   ```bash
-   pip install -r requirement.txt
-   ```
+### 3. Run the Analysis
 
-### 基本使用
+Use the main Python script:
 
-运行主分析笔记本：
+```bash
+python main.py
+```
 
-```python
-# 打开Jupyter笔记本
+Or open one of the event-specific notebooks:
+
+```bash
 jupyter notebook notebooks/GW150914_Analysis.ipynb
 ```
 
-## 分析流程
+## Analysis Workflow
 
-### 1. 数据获取
+### 1. Data Acquisition
 
-从GWOSC获取汉福德(H1)和利文斯顿(L1)观测站的应变数据
+The project retrieves strain data from the Hanford (H1) and Livingston (L1) LIGO detectors through GWOSC.
 
-### 2. 频谱分析
+### 2. Spectral Analysis
 
-- 计算振幅谱密度(ASD)
-- 识别60Hz、120Hz、180Hz电源线干扰
-- 分析噪声特性
+- Calculates amplitude spectral density (ASD).
+- Identifies power-line interference at 60, 120, and 180 Hz.
+- Examines detector noise characteristics across frequency bands.
 
-### 3. 信号滤波
+### 3. Signal Filtering
 
-- 50-250Hz带通滤波器保留引力波特征频段
-- 陷波滤波器消除电源线干扰
-- 零相位滤波避免信号失真
+- Uses a 50-250 Hz bandpass filter to preserve the frequency range where the gravitational-wave signal is most visible.
+- Applies notch filters to suppress power-line noise.
+- Uses zero-phase filtering to reduce phase distortion.
 
-### 4. 时域分析
+### 4. Time-Domain Analysis
 
-- 滤波前后信号对比
-- 应变振幅随时间变化
-- 事件附近信号细节
+- Compares raw and filtered strain data.
+- Focuses on the signal window surrounding each event.
+- Visualizes how the strain amplitude changes near the merger.
 
-### 5. 时频分析
+### 5. Time-Frequency Analysis
 
-- Q变换显示频率随时间变化
-- 啁啾信号特征可视化
-- 能量分布分析
+- Uses Q-transforms to show how signal frequency changes over time.
+- Highlights the chirp-like structure of compact-object mergers.
+- Displays normalized energy distribution in the time-frequency plane.
 
-### 6. 多站关联
+### 6. Multi-Detector Comparison
 
-- 汉福德与利文斯顿数据对比
-- 时间延迟补偿(6.9ms)
-- 相位调整和信号相关性分析
+- Compares Hanford and Livingston detections.
+- Applies a 6.9 ms time shift to account for arrival-time differences.
+- Adjusts phase to compare the two detector responses more clearly.
 
-### 7. 音频生成
+### 7. Audio Generation
 
-- 信号归一化处理
-- WAV文件格式转换
-- 可听化引力波信号
+- Normalizes the filtered strain signal.
+- Converts the selected time window into 16-bit WAV format.
+- Creates an audible representation of gravitational-wave data.
 
-## 技术细节
+## Scientific Context
 
-### 主要依赖库
+According to general relativity, gravitational waves are ripples in spacetime produced by accelerating massive objects. Binary black-hole and neutron-star mergers generate signals with three characteristic stages:
 
-- **GWPy**: 专业引力波数据分析
-- **NumPy/SciPy**: 科学计算和信号处理
-- **Matplotlib**: 数据可视化
+- **Inspiral**: the objects orbit closer together and the signal frequency rises.
+- **Merger**: the compact objects combine, producing the strongest part of the signal.
+- **Ringdown**: the final object settles into a stable state.
 
-### 滤波器设计
+This project examines how those physical events appear in real detector data, showing the path from raw observation to processed evidence.
+
+## Main Dependencies
+
+- **GWPy**: gravitational-wave data access and analysis.
+- **NumPy / SciPy**: numerical computing and signal processing.
+- **Matplotlib**: scientific visualization.
+- **Jupyter**: interactive analysis notebooks.
+
+## Example Filter Design
 
 ```python
-# 带通滤波器：50-250Hz
+# Bandpass filter: 50-250 Hz
 bp = filter_design.bandpass(50, 250, hdata.sample_rate)
 
-# 陷波滤波器：消除电源线干扰
+# Notch filters: remove power-line interference
 notches = [filter_design.notch(line, hdata.sample_rate) for line in (60, 120, 180)]
 ```
 
-## 结果示例
+## Outputs
 
-项目生成多种分析结果：
+The repository generates several kinds of analysis products:
 
-- 振幅谱密度图
-- 滤波前后信号对比
-- Q变换时频图
-- 多探测器数据关联
-- 引力波音频文件
+- Amplitude spectral density plots.
+- Raw versus filtered strain comparisons.
+- Q-transform time-frequency maps.
+- Hanford-Livingston detector comparisons.
+- Gravitational-wave audio files.
 
-## 物理背景
+## Acknowledgments
 
-基于广义相对论，引力波是时空弯曲的涟漪：
-
-- 双黑洞并合产生强烈引力波
-- 信号特征：旋近、合并、铃荡三个阶段
-- 频率啁啾和振幅增长特性
-
-## 贡献
-
-欢迎提交Issue和Pull Request来改进项目
-
-## 致谢
-
-- LIGO科学合作组织提供开放数据
-- GWPy开发团队提供专业分析工具
-- 所有为引力波探测做出贡献的科学家
-- github.com/wj198414/ASTRON1221的项目启发
+- Open data provided by the LIGO Scientific Collaboration and the Gravitational Wave Open Science Center.
+- Analysis tools provided by the GWPy development team.
+- Inspired in part by github.com/wj198414/ASTRON1221.
