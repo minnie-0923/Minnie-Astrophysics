@@ -1,5 +1,5 @@
 """
-引力波数据分析包
+Gravitational-wave data analysis package.
 """
 
 __version__ = "1.0.0"
